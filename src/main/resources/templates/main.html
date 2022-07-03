@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+<div class="top-panel">
+    <p><b id="bubble-text">HELP ME CHOOSE A PHOTO</b></p>
+    <button id="login" th:if="${anon}">LOGIN</button>
+    <form th:if="${!anon}" action="/logout" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="LOGOUT">
+    </form>
+</div>
+
+<div class="profile">
+    <img id="ava" alt src="https://sun2-9.userapi.com/s/v1/ig2/xpMT7UkpF4z-D0IGstWsns1sv_TZMBePM5iDhU1S2AmdRMwbyOVrtBX0Ov3LKLnMVRE-MQkFoSeU0sNe98KewwzQ.jpg?size=200x200&quality=95&crop=161,132,393,393&ava=1">
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let path = params.get("path");
+        if(path != null)
+            document.getElementById("ava").src = path;
+    </script>
+    <div class="profile-panel">
+        <a id="name">Женя Матеюк</a>
+        <div th:if="${!anon}">
+            <form method="post" enctype="multipart/form-data" action="/upload/photo" id="upload_photo">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <label for="file" class="hint"><u>Загрузить новую аву</u></label>
+                <input type="file" style="opacity: 0;" name="file" id="file" accept=".jpg">
+            </form>
+        </div>
+        <a class="hint" th:if="${anon}">Войдите, чтобы загрузить фотографию</a>
+    </div>
+</div>
+
+<script src="/static/js/jquery/jquery-3.6.0.min.js"></script>
+<script src="/static/js/jquery/jquery.bubble.text.js"></script>
+<script src="/static/js/main.js"></script>
+
+<!-- Put this script tag to the <head> of your page -->
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+
+<!-- Put this div tag to the place, where the Community messages block will be -->
+<div id="vk_community_messages"></div>
+<script type="text/javascript">
+    VK.Widgets.CommunityMessages("vk_community_messages", 214196566, {tooltipButtonText: "Хотите пройти регистрацию?", expanded: 0});
+</script>
+</body>
+</html>

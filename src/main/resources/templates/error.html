@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'ERROR ' + #response.getStatus()}"></title>
+    <link rel="stylesheet" href="/static/css/error.css">
+</head>
+<body>
+<img id="home" height="50" width="50" draggable="false" alt src="/static/images/home.png" onclick="window.location.href = '/';">
+<h1 th:text="${#response.getStatus()}"></h1>
+<div class="frame">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="caps">
+    <img src="" alt>
+</div>
+<canvas id="canvas"></canvas>
+
+<script src="/static/js/error.js"></script>
+</body>
+</html>
