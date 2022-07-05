@@ -10,11 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpringConfiguration implements WebMvcConfigurer {
     @Value("${upload.photo}")
     private String uploadPhoto;
+    @Value("${upload.photo.url}")
+    private String uploadPhotoUrl;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("/upload/photo/**").addResourceLocations(String.format("file://%s/", uploadPhoto));
+        registry.addResourceHandler(String.format("%s/**", uploadPhotoUrl)).addResourceLocations(String.format("file://%s/", uploadPhoto));
     }
 
     @Override
