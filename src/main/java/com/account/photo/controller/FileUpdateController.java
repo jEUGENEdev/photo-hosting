@@ -21,6 +21,8 @@ import java.util.UUID;
 public class FileUpdateController {
     @Value("${upload.photo}")
     private String uploadPhoto;
+    @Value("${upload.photo.url}")
+    private String uploadPhotoUrl;
     @Autowired
     private PhotoRepository photoRepository;
 
@@ -30,6 +32,6 @@ public class FileUpdateController {
         String name = URLEncoder.encode(UUID.randomUUID() + "_" + normalName, StandardCharsets.UTF_8);
         Files.copy(file.getInputStream(), Path.of(uploadPhoto + "/" + name));
         photoRepository.save(new Photo(file.getOriginalFilename(), name));
-        return "redirect:/?path=/upload/photo/" + name;
+        return "redirect:/?path=" + uploadPhotoUrl + "/" + name;
     }
 }
