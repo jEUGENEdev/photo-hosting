@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archive</title>
+    <link rel="stylesheet" href="/static/css/archive.css">
+</head>
+<body>
+<div class="top-panel absolute">
+    <a href="/" style="margin-left: 20px; font-size: 28px; cursor: pointer;">Главная страница</a>
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px; cursor: pointer;">
+        <img src="/static/images/user.png" height="40" width="40" alt>
+        <a th:if="${!anon}" id="account">Выход</a>
+        <a th:if="${anon}" id="account">Вход</a>
+        <form id="logout" action="/logout" method="post"><input id="csrf" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"></form>
+    </div>
+</div>
+<!--<div style="display: flex; justify-content: end; align-items: center; margin: 80px 5px 10px 0;"><a style="color: #641FE8; margin-right: 5px;">Фильтры</a><img style="cursor: pointer;" src="/static/images/filter.png" alt></div>-->
+<div id="photos">
+</div>
+<div style="display: flex; justify-content: center;">
+    <a style="color: blue; cursor: pointer; margin-bottom: 10px;" onclick="loadPhoto()"><u>Показать ещё</u></a>
+</div>
+
+<script src="/static/js/archive.js"></script>
+</body>
+</html>
