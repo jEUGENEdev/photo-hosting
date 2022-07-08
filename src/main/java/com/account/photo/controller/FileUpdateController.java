@@ -28,8 +28,9 @@ public class FileUpdateController {
 
     @PostMapping("/photo")
     public String photo(MultipartFile file) throws IOException {
-        String normalName = file.getOriginalFilename().replaceAll(" +", "_");
-        String name = URLEncoder.encode(UUID.randomUUID() + "_" + normalName, StandardCharsets.UTF_8);
+        String normalName = file.getOriginalFilename();
+        String name = URLEncoder.encode(UUID.randomUUID() + "_" + normalName, StandardCharsets.UTF_8)
+                .replaceAll("[ -]+", "_");
         Files.copy(file.getInputStream(), Path.of(uploadPhoto + "/" + name));
         photoRepository.save(new Photo(file.getOriginalFilename(), name));
         return "redirect:/?path=" + uploadPhotoUrl + "/" + name;
