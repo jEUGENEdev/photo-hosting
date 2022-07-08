@@ -1,6 +1,8 @@
 package com.account.photo.entity;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Photo {
@@ -9,7 +11,9 @@ public class Photo {
     private long id;
     @Column(columnDefinition="text")
     private String name, fullName;
-    private long likes;
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(joinColumns=@JoinColumn(name="photo_id"), inverseJoinColumns=@JoinColumn(name="user_id"))
+    private List<User> users;
 
     public Photo() {
     }
@@ -43,11 +47,26 @@ public class Photo {
         this.fullName = fullName;
     }
 
-    public long getLikes() {
-        return likes;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setLikes(long likes) {
-        this.likes = likes;
+    @Override
+    public String toString() {
+        return String.format("{\"id\": \"%s\", \"orig_name\": \"%s\", \"name\": \"%s\", \"like_count\": \"%s\"}",
+                getId(), getName(), getFullName(), getUsers().size());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photo photo = (Photo) o;
+        return id == photo.id && name.equals(photo.name) && fullName.equals(photo.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, fullName);
     }
 }
