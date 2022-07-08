@@ -18,4 +18,9 @@ public class PageController {
     public String mainPage() {
         return "main";
     }
+
+    @GetMapping("/archive")
+    public String archive() {
+        return "archive";
+    }
 }
