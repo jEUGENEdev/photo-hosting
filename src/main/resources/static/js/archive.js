@@ -37,7 +37,7 @@ function sharePhoto(photo) {
 
 function loadPhoto() {
     let photos = document.getElementById("photos");
-    fetch(`/photos/get?offset=${lastId}&count=10`).then(value => value.json()).then(data => {
+    fetch(`/photos/get?offset=${lastId}&count=10`, {method: "POST"}).then(value => value.json()).then(data => {
         if(data.status === 'ok') {
             let items = data.items;
             for (let i = 0; i < items.length; i++) {
