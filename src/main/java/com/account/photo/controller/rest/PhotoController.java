@@ -14,17 +14,17 @@ public class PhotoController {
     @Autowired
     private PhotoModel photoModel;
 
-    @GetMapping("/get")
+    @PostMapping("/get")
     public String get(@RequestParam(required=false) String count, @RequestParam(required=false) String offset, HttpServletResponse response) {
         return photoModel.get(count, offset);
     }
 
-    @GetMapping("/count")
+    @PostMapping("/count")
     public String count() {
         return photoModel.count();
     }
 
-    @GetMapping("/n/like")
+    @PostMapping("/n/like")
     public String like(@RequestParam(required = false) String id) {
         return photoModel.like(id, (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
