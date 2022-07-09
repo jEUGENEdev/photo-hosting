@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class PageController {
     @ModelAttribute
@@ -20,7 +22,7 @@ public class PageController {
     }
 
     @GetMapping("/archive")
-    public String archive() {
+    public String archive(HttpServletResponse response) {
         return "archive";
     }
 }
