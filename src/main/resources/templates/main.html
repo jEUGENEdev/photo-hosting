@@ -10,7 +10,6 @@
     <p><b id="bubble-text">HELP ME CHOOSE A PHOTO</b></p>
     <button id="login" th:if="${anon}">LOGIN</button>
     <form th:if="${!anon}" action="/logout" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit" value="LOGOUT">
     </form>
 </div>
@@ -27,7 +26,6 @@
         <a id="name">Женя Матеюк</a>
         <div th:if="${!anon}">
             <form method="post" enctype="multipart/form-data" action="/upload/photo" id="upload_photo">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <label for="file" class="hint"><u>Загрузить новую аву</u></label>
                 <input type="file" style="opacity: 0;" name="file" id="file" accept=".jpg">
             </form>

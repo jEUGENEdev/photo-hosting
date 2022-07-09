@@ -10,7 +10,6 @@
     <p id="header">ACCOUNT LOGIN</p>
     <div class="data-container">
         <form th:action="@{/auth}" th:method="POST">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="user-data">
                 <input class="field" placeholder="username" type="text" name="username" id="field-username">
                 <input class="field" placeholder="password" type="password" name="password" id="field-password">

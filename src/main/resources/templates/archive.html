@@ -12,7 +12,7 @@
         <img src="/static/images/user.png" height="40" width="40" alt>
         <a th:if="${!anon}" id="account">Выход</a>
         <a th:if="${anon}" id="account">Вход</a>
-        <form id="logout" action="/logout" method="post"><input id="csrf" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"></form>
+        <form id="logout" action="/logout" method="post"></form>
     </div>
 </div>
 <!--<div style="display: flex; justify-content: end; align-items: center; margin: 80px 5px 10px 0;"><a style="color: #641FE8; margin-right: 5px;">Фильтры</a><img style="cursor: pointer;" src="/static/images/filter.png" alt></div>-->
