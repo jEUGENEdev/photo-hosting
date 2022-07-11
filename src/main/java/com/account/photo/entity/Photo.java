@@ -1,5 +1,7 @@
 package com.account.photo.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class Photo {
     private String name, fullName;
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(joinColumns=@JoinColumn(name="photo_id"), inverseJoinColumns=@JoinColumn(name="user_id"))
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<User> users;
 
     public Photo() {

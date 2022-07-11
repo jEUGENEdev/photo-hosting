@@ -1,9 +1,6 @@
 package com.account.photo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,9 +8,22 @@ import java.util.Objects;
 public class User {
     @Id
     private long id;
+    private long vkId;
     private String username, password, role;
-    @ManyToMany(fetch= FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER, mappedBy="users")
     private List<Photo> photos;
+    private boolean enable;
+
+    public User() {
+    }
+
+    public User(long vkId, String username, String password, String role, boolean enable) {
+        this.vkId = vkId;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.enable = enable;
+    }
 
     public String getUsername() {
         return username;
@@ -43,6 +53,30 @@ public class User {
         return photos;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public long getVkId() {
+        return vkId;
+    }
+
+    public void setVkId(long vkId) {
+        this.vkId = vkId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,5 +88,16 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", photos=" + photos +
+                '}';
     }
 }
