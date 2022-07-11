@@ -39,6 +39,21 @@ body, html {
     justify-content: start;
 }
 
+#dialog {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin: 0 0 3% 1%;
+    background: #641FE8;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+#p1, #p2 {
+    margin: 0;
+}
+
 @media screen and (min-width: 1000px) {
     .top-panel {
         min-height: 40vh;
@@ -80,6 +95,20 @@ body, html {
 
     .profile-panel {
         height: 100%;
+    }
+
+    #dialog {
+        top: 70%;
+        width: 30%;
+    }
+
+    #p1 {
+        font-size: 24px;
+    }
+
+    #p2 {
+        font-size: 18px;
+        margin-bottom: 2%;
     }
 }
 
@@ -124,5 +153,19 @@ body, html {
 
     .profile-panel {
         height: 100%;
+    }
+
+    #dialog {
+        top: 88%;
+        width: 60%;
+    }
+
+    #p1 {
+        font-size: 28px;
+    }
+
+    #p2 {
+        font-size: 20px;
+        margin-bottom: 2%;
     }
 }
