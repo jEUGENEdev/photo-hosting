@@ -3,6 +3,7 @@ package com.account.photo.model;
 import com.account.photo.entity.Photo;
 import com.account.photo.entity.User;
 import com.account.photo.repository.PhotoRepository;
+import com.account.photo.repository.UserRepository;
 import com.account.photo.security.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,8 @@ import java.util.List;
 public class PhotoModel {
     @Autowired
     private PhotoRepository photoRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public String get(String cnt, String ofs) {
@@ -31,6 +34,7 @@ public class PhotoModel {
         User user = null;
         try {
             user = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+            user = userRepository.findById(user.getId()).orElse(null);
         } catch(ClassCastException ignored) {}
         List<Photo> photoList = photoRepository.findByIdRange(offset+1, offset+count+1);
         StringBuilder response = new StringBuilder("{\"status\": \"ok\", \"items\": [ ");
@@ -62,15 +66,16 @@ public class PhotoModel {
         if(photo == null)
             return "{\"status\": \"err\"}";
         boolean like = false;
-        List<Photo> photoList = principal.getUser().getPhotos();
-        if(photoList.contains(photo)) {
-            photoList.remove(photo);
-            photo.getUsers().remove(principal.getUser());
+        User user = userRepository.findById(principal.getUser().getId()).orElseThrow();
+        List<Photo> userPhotoList = user.getPhotos();
+        if(userPhotoList.contains(photo)) {
+            userPhotoList.remove(photo);
+            photo.getUsers().remove(user);
         }
         else {
             like = true;
-            photoList.add(photo);
-            photo.getUsers().add(principal.getUser());
+            userPhotoList.add(photo);
+            photo.getUsers().add(user);
         }
         return String.format("{\"status\": \"ok\", \"type\": \"%s\"}", like ? "like" : "dislike");
     }
