@@ -15,7 +15,7 @@ function likePhoto(photo) {
     if(document.getElementById("account").innerText === "Выход") {
         let like_count = photo.parentNode.getElementsByTagName("a")[0];
         let id = photo.parentNode.getElementsByTagName("input")[0].value;
-        fetch(`/photos/n/like?id=${id}`).then(value => value.json()).then(data => {
+        fetch(`/photos/n/like?id=${id}`, {method: "POST"}).then(value => value.json()).then(data => {
             if (data.type === "like") {
                 like_count.innerText = Number(like_count.innerText) + 1;
                 photo.src = "/static/images/shaded_like.png";
