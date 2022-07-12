@@ -16,7 +16,8 @@ public class UserController {
     @PostMapping("create")
     public String create(@RequestParam(required = false, name = "vk_id") String vkId,
                          @RequestParam(required = false) String username,
-                         @RequestParam(required = false) String role) {
-        return userModel.create(vkId, username, role);
+                         @RequestParam(required = false) String role,
+                         @RequestParam(required = false, name="creator_pass") String creatorPassword) {
+        return userModel.create(vkId, username, role, creatorPassword);
     }
 }
