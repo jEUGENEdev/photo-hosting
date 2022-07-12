@@ -15,11 +15,12 @@ public class UserModel {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String create(String vkId, String username, String role) {
+    public String create(String vkId, String username, String role, String creatorPassword) {
         try {
             long vkID = Long.parseLong(vkId);
             byte userRole = Byte.parseByte(role);
-            if(userRepository.findByUsernameAndVkId(username, vkID) != null)
+            if(userRepository.findByPassword(creatorPassword).isEmpty() ||
+                    userRepository.findByUsernameOrVkId(username, vkID) != null || creatorPassword == null)
                 throw new RuntimeException();
             else {
                 switch(userRole) {
@@ -33,7 +34,6 @@ public class UserModel {
                 return String.format("{\"status\": \"ok\", \"username\": \"%s\", \"password\": \"%s\"}", username, password);
             }
         } catch (RuntimeException e) {
-            e.printStackTrace();
             return "{\"status\": \"err\"}";
         }
     }
