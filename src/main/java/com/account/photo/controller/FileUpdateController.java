@@ -4,6 +4,7 @@ import com.account.photo.entity.Photo;
 import com.account.photo.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class FileUpdateController {
     @Autowired
     private PhotoRepository photoRepository;
 
-    @PostMapping("/photo")
+    @PostMapping("/n/photo")
     public String photo(MultipartFile file) throws IOException {
         String normalName = file.getOriginalFilename();
         String name = URLEncoder.encode(UUID.randomUUID() + "_" + normalName, StandardCharsets.UTF_8)
