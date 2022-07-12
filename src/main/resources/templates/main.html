@@ -25,7 +25,7 @@
     <div class="profile-panel">
         <a id="name">Женя Матеюк</a>
         <div th:if="${!anon}">
-            <form method="post" enctype="multipart/form-data" action="/upload/photo" id="upload_photo">
+            <form method="post" enctype="multipart/form-data" action="/upload/n/photo" id="upload_photo">
                 <label for="file" class="hint"><u>Загрузить новую аву</u></label>
                 <input type="file" style="opacity: 0;" name="file" id="file" accept=".jpg">
             </form>
@@ -37,14 +37,5 @@
 <script src="/static/js/jquery/jquery-3.6.0.min.js"></script>
 <script src="/static/js/jquery/jquery.bubble.text.js"></script>
 <script src="/static/js/main.js"></script>
-
-<!-- Put this script tag to the <head> of your page -->
-<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
-
-<!-- Put this div tag to the place, where the Community messages block will be -->
-<div id="vk_community_messages"></div>
-<script type="text/javascript">
-    VK.Widgets.CommunityMessages("vk_community_messages", 214196566, {tooltipButtonText: "Хотите пройти регистрацию?", expanded: 0});
-</script>
 </body>
 </html>
