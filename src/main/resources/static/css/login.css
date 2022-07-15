@@ -27,6 +27,10 @@
     border: 0;
 }
 
+#vk_auth {
+    margin-top: 10px;
+}
+
 @media screen and (min-width: 1000px) {
     html, body, .container {
         margin: 0;
