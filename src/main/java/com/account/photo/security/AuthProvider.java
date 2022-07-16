@@ -19,9 +19,9 @@ public class AuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UserDetails user = (UserDetails) userDetailsService.loadUserByUsername(authentication.getName());
-        if(!user.getPassword().equals(passwordEncoder.encode(authentication.getCredentials().toString())))
-            throw new BadCredentialsException("Error password!");
-        return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        if(user.getPassword() == null || user.getPassword().equals(passwordEncoder.encode(authentication.getCredentials().toString())))
+            return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        throw new BadCredentialsException("Error password!");
     }
 
     @Override
