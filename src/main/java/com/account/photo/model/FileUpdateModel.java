@@ -32,6 +32,7 @@ public class FileUpdateModel {
 
     public String photo(MultipartFile file) throws IOException {
         User user = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        user = userRepository.findById(user.getId()).orElseThrow();
         if(System.currentTimeMillis() - user.getLastPhotoPost() < (new Random().nextInt(30001) + 30000))
             return "redirect:/?error";
         user.setLastPhotoPost(System.currentTimeMillis());
