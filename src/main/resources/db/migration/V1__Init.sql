@@ -13,10 +13,9 @@ create table user (
     password varchar(255),
     role varchar(255),
     username varchar(255),
-    vk_id bigint unique not null
+    vk_id bigint unique not null,
+    last_photo_post bigint default 0 not null
 );
-
-insert into user (id, password, role, username, vk_id) values (1, 'qNfjs493jfNru*hf', 'ROLE_CREATOR', 'creator', 145441435);
 
 create table photo_users (
     photo_id bigint not null,
