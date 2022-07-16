@@ -14,7 +14,8 @@ create table user (
     role varchar(255),
     username varchar(255),
     vk_id bigint unique not null,
-    last_photo_post bigint default 0 not null
+    last_photo_post bigint default 0 not null,
+    enable bool not null default TRUE
 );
 
 create table photo_users (
