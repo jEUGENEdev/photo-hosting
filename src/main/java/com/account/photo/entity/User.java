@@ -1,6 +1,9 @@
 package com.account.photo.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +11,7 @@ import java.util.Objects;
 public class User {
     @Id
     private long id;
-    private long vkId;
+    private long vkId, lastPhotoPost;
     private String username, password, role;
     @ManyToMany(fetch=FetchType.EAGER, mappedBy="users")
     private List<Photo> photos;
@@ -75,6 +78,14 @@ public class User {
 
     public void setVkId(long vkId) {
         this.vkId = vkId;
+    }
+
+    public long getLastPhotoPost() {
+        return lastPhotoPost;
+    }
+
+    public void setLastPhotoPost(long lastPhotoPost) {
+        this.lastPhotoPost = lastPhotoPost;
     }
 
     @Override
