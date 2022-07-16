@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/static/**", String.format("%s/**", uploadPhotoUrl), "/login", "/auth",
                         "/archive", "/photos/*", "/users/**").permitAll()
-                .antMatchers("/auth/vk").hasIpAddress("87.240.137.158")
+                .antMatchers("/auth/vk").hasIpAddress("94.228.123.131")
                 .anyRequest().hasAnyRole("USER", "CREATOR", "ADMIN", "MODER")
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/auth")
