@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticationProvider(authenticationProvider)
                 .authorizeRequests()
                 .antMatchers("/", "/static/**", String.format("%s/**", uploadPhotoUrl), "/login", "/auth",
-                        "/archive", "/photos/*", "/users/**", "/auth/vk", "/help/**").permitAll()
+                        "/archive", "/photos/*", "/users/**", "/auth/vk", "/help/**", "/favicon.ico").permitAll()
                 .anyRequest().hasAnyRole("USER", "CREATOR", "ADMIN", "MODER")
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/auth")
