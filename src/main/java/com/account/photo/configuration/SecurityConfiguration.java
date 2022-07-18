@@ -1,9 +1,9 @@
 package com.account.photo.configuration;
 
+import com.account.photo.security.AuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -12,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${upload.photo.url}")
     private String uploadPhotoUrl;
     @Autowired
-    private AuthenticationProvider authenticationProvider;
+    private AuthProvider authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
